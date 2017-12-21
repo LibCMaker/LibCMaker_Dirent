@@ -1,0 +1,1 @@
+LibCMaker_Dirent is a CMake build scripts for build Dirent library with CMake.
