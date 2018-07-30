@@ -21,7 +21,7 @@
 #    along with this program. If not, see <http://www.gnu.org/licenses/>.
 # ****************************************************************************
 
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.3)
 
 project(LibCMaker_Dirent_Compile_Test C)
 
@@ -63,15 +63,12 @@ set(LIBCMAKER_SRC_DIR "${PROJECT_SOURCE_DIR}/cmake/LibCMaker")
 #set(BUILD_SHARED_LIBS ON)
 
 # Vars to lib_cmaker_dirent().
-set(DIRENT_lib_VERSION "1.23.1")
-set(DIRENT_DOWNLOAD_DIR "${PROJECT_BINARY_DIR}")
-set(DIRENT_UNPACKED_DIR "${PROJECT_BINARY_DIR}")
-set(DIRENT_BUILD_DIR "${PROJECT_BINARY_DIR}/build_dirent")
+set(DIRENT_lib_VERSION    "1.23.1")
+set(DIRENT_DOWNLOAD_DIR   "${PROJECT_BINARY_DIR}")
+set(DIRENT_UNPACKED_DIR   "${PROJECT_BINARY_DIR}")
+set(DIRENT_BUILD_DIR      "${PROJECT_BINARY_DIR}/build_dirent")
 
 set(COPY_DIRENT_CMAKE_BUILD_SCRIPTS ON)
-
-set(DIRENT_DIR "${CMAKE_INSTALL_PREFIX}")
-set(ENV{DIRENT_DIR} "${DIRENT_DIR}")
 
 # Library specific vars and options.
 
@@ -85,10 +82,10 @@ include(
 
 # Make compile, build and install the library at a config CMake phase.
 lib_cmaker_dirent(
-  VERSION ${DIRENT_lib_VERSION}
-  DOWNLOAD_DIR ${DIRENT_DOWNLOAD_DIR}
-  UNPACKED_DIR ${DIRENT_UNPACKED_DIR}
-  BUILD_DIR ${DIRENT_BUILD_DIR}
+  VERSION       ${DIRENT_lib_VERSION}
+  DOWNLOAD_DIR  ${DIRENT_DOWNLOAD_DIR}
+  UNPACKED_DIR  ${DIRENT_UNPACKED_DIR}
+  BUILD_DIR     ${DIRENT_BUILD_DIR}
 )
 
 
