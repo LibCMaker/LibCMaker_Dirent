@@ -25,7 +25,7 @@
 
   # Copy CMake build scripts.
   if(COPY_DIRENT_CMAKE_BUILD_SCRIPTS)
-    cmr_print_message(
+    cmr_print_status(
       "Copy CMake build scripts to unpacked sources.")
     execute_process(
       COMMAND ${CMAKE_COMMAND} -E copy_directory
