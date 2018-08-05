@@ -105,7 +105,7 @@ find_package(Dirent REQUIRED)
 
 # Get an example sources from the lib sources.
 set(lib_SRC_DIR
-  "${HB_UNPACKED_DIR}/harfbuzz-${HB_lib_VERSION}/harfbuzz-${HB_lib_VERSION}/test"
+  "${DIRENT_UNPACKED_DIR}/dirent-${DIRENT_lib_VERSION}/dirent-${DIRENT_lib_VERSION}"
 )
 set(lib_EXAMPLES_SRC_DIR ${lib_SRC_DIR}/examples)
 

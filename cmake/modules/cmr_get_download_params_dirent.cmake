@@ -33,9 +33,7 @@
   set(arch_file_name  "${src_dir_name}.tar.gz")
   set(unpack_to_dir   "${unpacked_dir}/${src_dir_name}")
 
-  set(${out_ARCH_SRC_URL}
-    "${base_url}/${major}.${minor}.${patch}.tar.gz" PARENT_SCOPE
-  )
+  set(${out_ARCH_SRC_URL} "${base_url}/${version}.tar.gz" PARENT_SCOPE)
   set(${out_ARCH_DST_FILE}  "${download_dir}/${arch_file_name}" PARENT_SCOPE)
   set(${out_ARCH_FILE_SHA}  "${arch_file_sha}" PARENT_SCOPE)
   set(${out_SHA_ALG}        "SHA256" PARENT_SCOPE)
