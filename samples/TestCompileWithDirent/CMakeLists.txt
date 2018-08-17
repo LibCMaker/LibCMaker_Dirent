@@ -40,61 +40,51 @@ if(ANDROID)
   list(APPEND CMAKE_FIND_ROOT_PATH "${CMAKE_INSTALL_PREFIX}")
 endif()
 
-# To use our FindDirent.cmake.
-list(APPEND CMAKE_MODULE_PATH
-  "${PROJECT_SOURCE_DIR}/cmake/LibCMaker_Dirent/cmake"
-)
-
 
 #-----------------------------------------------------------------------
 # Set path to LibCMaker root
 #-----------------------------------------------------------------------
 
-set(LIBCMAKER_SRC_DIR "${PROJECT_SOURCE_DIR}/cmake/LibCMaker")
-# Uncomment it if need functions from LibCMaker.
-#list(APPEND CMAKE_MODULE_PATH "${LIBCMAKER_SRC_DIR}/cmake/modules")
+set(LibCMaker_DIR "${CMAKE_CURRENT_LIST_DIR}/cmake/LibCMaker")
+# Uncomment it if need functions from LibCMaker
+#list(APPEND CMAKE_MODULE_PATH "${LibCMaker_DIR}/cmake")
 
 
 #-----------------------------------------------------------------------
 # Set vars for LibCMaker_Dirent
 #-----------------------------------------------------------------------
 
-# Standard CMake vars.
-#set(BUILD_SHARED_LIBS ON)
+set(DIRENT_lib_NAME     "Dirent")
+set(DIRENT_lib_VERSION  "1.23.1")
+set(DIRENT_lib_DIR      "${CMAKE_CURRENT_LIST_DIR}/cmake/LibCMaker_Dirent")
 
-# Vars to lib_cmaker_dirent().
-set(DIRENT_lib_VERSION    "1.23.1")
-set(DIRENT_DOWNLOAD_DIR   "${PROJECT_BINARY_DIR}")
-set(DIRENT_UNPACKED_DIR   "${PROJECT_BINARY_DIR}")
-set(DIRENT_BUILD_DIR      "${PROJECT_BINARY_DIR}/build_dirent")
+# To use below for sample sources.
+set(cmr_UNPACKED_DIR ${CMAKE_CURRENT_BINARY_DIR}/download/unpacked)
+
+# To use our FindDirent.cmake.
+list(APPEND CMAKE_MODULE_PATH "${DIRENT_lib_DIR}/cmake/modules")
 
 set(COPY_DIRENT_CMAKE_BUILD_SCRIPTS ON)
 
-# Library specific vars and options.
+
+#-----------------------------------------------------------------------
+# Library specific vars and options
+#-----------------------------------------------------------------------
 
 
 #-----------------------------------------------------------------------
-# Build and install the Dirent
+# Build, install and find the Dirent
 #-----------------------------------------------------------------------
 
-include(
-  ${PROJECT_SOURCE_DIR}/cmake/LibCMaker_Dirent/lib_cmaker_dirent.cmake)
-
-# Make compile, build and install the library at a config CMake phase.
-lib_cmaker_dirent(
-  VERSION       ${DIRENT_lib_VERSION}
-  DOWNLOAD_DIR  ${DIRENT_DOWNLOAD_DIR}
-  UNPACKED_DIR  ${DIRENT_UNPACKED_DIR}
-  BUILD_DIR     ${DIRENT_BUILD_DIR}
+# Make build and install the library at a config CMake phase.
+include(${LibCMaker_DIR}/cmake/cmr_find_package.cmake)
+cmr_find_package(
+  LibCMaker_DIR   ${LibCMaker_DIR}
+  NAME            ${DIRENT_lib_NAME}
+  VERSION         ${DIRENT_lib_VERSION}
+  LIB_DIR         ${DIRENT_lib_DIR}
+  REQUIRED
 )
-
-
-#-----------------------------------------------------------------------
-# find_package
-#-----------------------------------------------------------------------
-
-# Use newly got library.
-find_package(Dirent REQUIRED)
 
 
 #-----------------------------------------------------------------------
@@ -105,7 +95,7 @@ find_package(Dirent REQUIRED)
 
 # Get an example sources from the lib sources.
 set(lib_SRC_DIR
-  "${DIRENT_UNPACKED_DIR}/dirent-${DIRENT_lib_VERSION}/dirent-${DIRENT_lib_VERSION}"
+  "${cmr_UNPACKED_DIR}/dirent-${DIRENT_lib_VERSION}/dirent-${DIRENT_lib_VERSION}"
 )
 set(lib_EXAMPLES_SRC_DIR ${lib_SRC_DIR}/examples)
 
