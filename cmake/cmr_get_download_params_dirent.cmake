@@ -27,13 +27,19 @@
     set(arch_file_sha
       "8d699c068270e65e8cb2f76a3cd40542337fb984263dc6361bbb47e8ec89ea2a")
   endif()
+  if(version VERSION_EQUAL "1.23.2.20210914")
+    set(arch_file_sha
+      "d58e843dcdbd8741aaa7e0de4fcac3e677962d050a0930da3f7eeb226b9cff29")
+    set(src_commit
+      "7034a5ee3b56e4cab9a299c6b7de700e76051bb0")
+  endif()
 
   set(base_url "https://github.com/tronkko/dirent/archive")
   set(src_dir_name    "dirent-${version}")
   set(arch_file_name  "${src_dir_name}.tar.gz")
   set(unpack_to_dir   "${unpacked_dir}/${src_dir_name}")
 
-  set(${out_ARCH_SRC_URL} "${base_url}/${version}.tar.gz" PARENT_SCOPE)
+  set(${out_ARCH_SRC_URL}   "${base_url}/${version}.tar.gz" PARENT_SCOPE)
   set(${out_ARCH_DST_FILE}  "${download_dir}/${arch_file_name}" PARENT_SCOPE)
   set(${out_ARCH_FILE_SHA}  "${arch_file_sha}" PARENT_SCOPE)
   set(${out_SHA_ALG}        "SHA256" PARENT_SCOPE)
@@ -42,3 +48,10 @@
     "${unpack_to_dir}/${src_dir_name}" PARENT_SCOPE
   )
   set(${out_VERSION_BUILD_DIR} "${build_dir}/${src_dir_name}" PARENT_SCOPE)
+
+  if(src_commit)
+    set(${out_ARCH_SRC_URL} "${base_url}/${src_commit}.tar.gz" PARENT_SCOPE)
+    set(${out_UNPACKED_SOURCES_DIR}
+      "${unpack_to_dir}/dirent-${src_commit}" PARENT_SCOPE
+    )
+  endif()
